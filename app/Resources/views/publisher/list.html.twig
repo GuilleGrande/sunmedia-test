@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Publishers</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for publisher in publishers %}
+                <tr>
+                    <td>
+                        <a href="{{ path('publisher_show', {
+                            'publisherName': publisher.name
+                            })
+                        }}">{{ publisher.name }}</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

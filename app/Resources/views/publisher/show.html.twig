@@ -1,15 +1,5 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>The publisher: {{ name }}</h1>
-
-    <ul>
-        {% for note in notes %}
-            <li>{{ note }}</li>
-        {% endfor %}
-    </ul>
-
-    <a href="{{ path('show_all_publishers') }}">Json Notes</a>
-
-    {{ dump() }}
+    <h1>Publisher: {{ publisher.name }}</h1>
 {% endblock %}

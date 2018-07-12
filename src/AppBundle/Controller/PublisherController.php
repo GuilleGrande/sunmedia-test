@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Publisher;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -10,37 +11,53 @@ use Symfony\Component\HttpFoundation\Response;
 
 class PublisherController extends Controller
 {
+
     /**
-     * @Route("/publisher/{publisherName}")
+     * @Route("/publisher/new")
+     */
+    public function newAction() {
+
+        $publisher = new Publisher();
+        $publisher->setName('Sunmedia'.rand(1,100));
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($publisher);
+        $em->flush();
+
+        return new Response('<html><body><h1>Publisher Created!</h1></body></html>');
+    }
+
+    /**
+     * @Route("/publishers", name="list_publishers")
+     */
+    public function listAction(){
+
+        $em = $this->getDoctrine()->getManager();
+        $publishers = $em->getRepository('AppBundle:Publisher')
+            ->findAll();
+
+        return $this->render('publisher/list.html.twig', [
+            'publishers' => $publishers,
+        ]);
+
+    }
+
+    /**
+     * @Route("/publisher/{publisherName}", name="publisher_show")
      */
     public function showAction($publisherName) {
 
-        $notes = [
-            'Octopus asked me a riddle, outsmarted me',
-            'I counted 8 legs... as they wrapped around me',
-            'Inked!'
-        ];
+        $em = $this->getDoctrine()->getManager();
+        $publisher = $em->getRepository('AppBundle:Publisher')
+            ->findOneBy(['name' => $publisherName]);
+
+        if (!$publisher) {
+            throw $this->createNotFoundException('No publisher found');
+        }
 
         return $this->render('publisher/show.html.twig', [
-            'name' => $publisherName,
-            'notes' => $notes
+            'publisher' => $publisher
         ]);
     }
 
-
-    /**
-     * @Route("/all-publishers", name="show_all_publishers")
-     * @Method("GET")
-     */
-    public function getAllPublishersAction(){
-
-        $data = [
-            'Octopus asked me a riddle, outsmarted me',
-            'I counted 8 legs... as they wrapped around me',
-            'Inked!'
-        ];
-
-        return new JsonResponse($data);
-
-    }
 }

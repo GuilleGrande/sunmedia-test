@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Components list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Height</th>
+                <th>Width</th>
+                <th>Coorx</th>
+                <th>Coory</th>
+                <th>Coorz</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for component in components %}
+            <tr>
+                <td><a href="{{ path('component_show', { 'id': component.id }) }}">{{ component.id }}</a></td>
+                <td>{{ component.name }}</td>
+                <td>{{ component.height }}</td>
+                <td>{{ component.width }}</td>
+                <td>{{ component.coorX }}</td>
+                <td>{{ component.coorY }}</td>
+                <td>{{ component.coorZ }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('component_show', { 'id': component.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('component_edit', { 'id': component.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('component_new') }}">Create a new component</a>
+        </li>
+    </ul>
+{% endblock %}

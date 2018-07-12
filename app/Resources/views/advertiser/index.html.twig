@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Advertisers list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for advertiser in advertisers %}
+            <tr>
+                <td><a href="{{ path('advertiser_show', { 'id': advertiser.id }) }}">{{ advertiser.id }}</a></td>
+                <td>{{ advertiser.name }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('advertiser_show', { 'id': advertiser.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('advertiser_edit', { 'id': advertiser.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('advertiser_new') }}">Create a new advertiser</a>
+        </li>
+    </ul>
+{% endblock %}

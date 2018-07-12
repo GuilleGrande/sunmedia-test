@@ -1,3 +1,7 @@
 AppBundle\Entity\Publisher:
   publisher_{1..10}:
     name: <name()>
+
+AppBundle\Entity\Advertiser:
+  advertiser_{1..10}:
+    name: <name()>

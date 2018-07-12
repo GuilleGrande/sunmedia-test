@@ -28,7 +28,7 @@ class PublisherController extends Controller
     }
 
     /**
-     * @Route("/publishers", name="list_publishers")
+     * @Route("/publisher", name="list_publishers")
      */
     public function listAction(){
 

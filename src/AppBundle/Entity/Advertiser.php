@@ -5,25 +5,25 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Publisher
- * 
- * @ORM\Table(name="publishers")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\PublisherRepository")
+ * Advertiser
+ *
+ * @ORM\Table(name="advertisers")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\AdvertiserRepository")
  */
-class Publisher {
+class Advertiser {
 
     /**
      * @var int
-     * 
+     *
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
      * @var string
-     * 
+     *
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
@@ -43,7 +43,7 @@ class Publisher {
      *
      * @param string $name
      *
-     * @return Publisher
+     * @return Advertiser
      */
     public function setName($name)
     {
@@ -62,3 +62,4 @@ class Publisher {
         return $this->name;
     }
 }
+

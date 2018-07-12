@@ -3,19 +3,27 @@
 {% block body %}
     <h1>Creative</h1>
 
-    <table>
-        <tbody>
+    <table class="table table-striped col-md-8">
+        <thead>
             <tr>
                 <th>Id</th>
-                <td>{{ creative.id }}</td>
-            </tr>
-            <tr>
                 <th>Name</th>
-                <td>{{ creative.name }}</td>
-            </tr>
-            <tr>
                 <th>Status</th>
-                <td>{% if creative.status %}Yes{% else %}No{% endif %}</td>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ creative.id }}</td>
+                <td>{{ creative.name }}</td>
+                <td>{% if creative.status %}Published{% else %}Unpublished{% endif %}</td>
+                <td><a href="{{ path('creative_edit', { 'id': creative.id }) }}" type="button" class="btn btn-primary" role="button">Edit</a></td>
+                <td>
+                    {{ form_start(delete_form) }}
+                        <input type="submit" class="btn btn-danger" value="Delete">
+                    {{ form_end(delete_form) }}
+                </td>
             </tr>
         </tbody>
     </table>
@@ -23,14 +31,6 @@
     <ul>
         <li>
             <a href="{{ path('creative_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('creative_edit', { 'id': creative.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
         </li>
     </ul>
 {% endblock %}

@@ -42,6 +42,17 @@ class Creative
     private $advertiser;
 
     /**
+     * @ORM\ManyToMany(targetEntity="Publisher", mappedBy="relatedCreatives")
+     */
+    private $relatedPublishers;
+
+    public function __construct() {
+
+        $this->relatedPublishers = new ArrayCollection();
+
+    }
+
+    /**
      * Get id
      *
      * @return int
@@ -107,6 +118,15 @@ class Creative
     public function getAdvertiser()
     {
         return $this->advertiser;
+    }
+
+    /**
+     * @return ArrayCollection|Publisher[]
+     */
+    public function getRelatedPublishers()
+    {
+        return $this->relatedPublishers;
+
     }
 }
 

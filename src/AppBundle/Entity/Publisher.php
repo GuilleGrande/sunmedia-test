@@ -30,13 +30,13 @@ class Publisher {
     private $name;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Creative")
+     * @ORM\ManyToMany(targetEntity="Creative", inversedBy="relatedPublishers")
      */
-    private $publisherCreative;
+    private $relatedCreatives;
 
-    public function __contruct()
+    public function __construct()
     {
-        $this->publisherCreative = new ArrayCollection();
+        $this->relatedCreatives = new ArrayCollection();
     }
 
     /**
@@ -73,15 +73,18 @@ class Publisher {
         return $this->name;
     }
 
-    public function addPublisherCreative(Creative $creative)
+    public function addRelatedCreatives(Creative $creative)
     {
-        if ($this->publisherCreative->contains($creative)) {
+        if ($this->relatedCreatives->contains($creative)) {
             return;
         }
-        $this->publisherCreative[] = $creative; 
+        $this->relatedCreatives[] = $creative;
     }
 
-    public function getPublisherCreative(){
-        return $this->publisherCreative;
+    /**
+     * @return ArrayCollection|Creative[]
+     */
+    public function getRelatedCreatives(){
+        return $this->relatedCreatives;
     }
 }

@@ -23,9 +23,9 @@ class PublisherController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $creative = $em->getRepository('AppBundle:Creative')
-            ->findOneBy(['id' => 1]);
+            ->findOneBy(['id' => 4]);
 
-        $publisher->addPublisherCreative($creative);
+        $publisher->addRelatedCreatives($creative);
 
         $em->persist($publisher);
         $em->flush();

@@ -2,4 +2,23 @@
 
 {% block body %}
     <h1>Publisher: {{ publisher.name }}</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Related creatives</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for relatedCreatives in publisher.relatedCreatives %}
+                <tr>
+                    <td>
+                        <a href="{{ path('creative_show', {
+                            'id': relatedCreatives.id
+                            })
+                        }}">{{ relatedCreatives.name }}</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}

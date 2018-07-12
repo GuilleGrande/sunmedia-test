@@ -3,6 +3,8 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Advertiser
@@ -15,8 +17,8 @@ class Advertiser {
     /**
      * @var int
      *
-     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
+     * @ORM\Column(name="id", type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
@@ -27,6 +29,23 @@ class Advertiser {
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
+
+
+    /**
+     * @ORM\OneToMany(targetEntity="Creative", mappedBy="advertiser")
+     */
+    private $creatives;
+
+    /**
+     * @ORM\Column(type="string", unique=true)
+     * @Gedmo\Slug(fields={"name"})
+     */
+    private $slug;
+
+    public function __construct()
+    {
+        $this->creatives = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -60,6 +79,21 @@ class Advertiser {
     public function getName()
     {
         return $this->name;
+    }
+
+    public function getCreatives()
+    {
+        return $this->creatives;
+    }
+
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    public function setSlug()
+    {
+        $this->slug = $slug;
     }
 }
 

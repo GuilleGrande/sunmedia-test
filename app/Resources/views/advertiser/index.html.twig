@@ -14,12 +14,12 @@
         <tbody>
         {% for advertiser in advertisers %}
             <tr>
-                <td><a href="{{ path('advertiser_show', { 'id': advertiser.id }) }}">{{ advertiser.id }}</a></td>
+                <td><a href="{{ path('advertiser_show', { 'slug': advertiser.slug }) }}">{{ advertiser.id }}</a></td>
                 <td>{{ advertiser.name }}</td>
                 <td>
                     <ul>
                         <li>
-                            <a href="{{ path('advertiser_show', { 'id': advertiser.id }) }}">show</a>
+                            <a href="{{ path('advertiser_show', { 'slug': advertiser.slug }) }}">show</a>
                         </li>
                         <li>
                             <a href="{{ path('advertiser_edit', { 'id': advertiser.id }) }}">edit</a>

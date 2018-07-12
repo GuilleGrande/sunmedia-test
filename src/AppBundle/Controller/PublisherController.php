@@ -21,6 +21,12 @@ class PublisherController extends Controller
         $publisher->setName('Sunmedia'.rand(1,100));
 
         $em = $this->getDoctrine()->getManager();
+
+        $creative = $em->getRepository('AppBundle:Creative')
+            ->findOneBy(['id' => 1]);
+
+        $publisher->addPublisherCreative($creative);
+
         $em->persist($publisher);
         $em->flush();
 
@@ -28,15 +34,17 @@ class PublisherController extends Controller
     }
 
     /**
-     * @Route("/publisher", name="list_publishers")
+     * Lists all publishers entities
+     * 
+     * @Route("/publisher/", name="publisher_index")
      */
-    public function listAction(){
+    public function indexAction(){
 
         $em = $this->getDoctrine()->getManager();
         $publishers = $em->getRepository('AppBundle:Publisher')
             ->findAll();
 
-        return $this->render('publisher/list.html.twig', [
+        return $this->render('publisher/index.html.twig', [
             'publishers' => $publishers,
         ]);
 

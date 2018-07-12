@@ -1,7 +1,13 @@
 AppBundle\Entity\Publisher:
   publisher_{1..10}:
-    name: <name()>
+    name: <company()>
 
 AppBundle\Entity\Advertiser:
   advertiser_{1..10}:
-    name: <name()>
+    name: <company()>
+
+AppBundle\Entity\Creative:
+  advertiser.creative_{1..50}:
+    name: <sentence($nbWords = 6, $variableNbWords = true)>
+    status: false
+    advertiser: '@advertiser_*'

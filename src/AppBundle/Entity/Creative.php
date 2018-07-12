@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Creative
  *
- * @ORM\Table(name="creative")
+ * @ORM\Table(name="creatives")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\CreativeRepository")
  */
 class Creative
@@ -33,8 +33,13 @@ class Creative
      *
      * @ORM\Column(name="status", type="boolean")
      */
-    private $status;
+    private $status = false;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Advertiser", inversedBy="creatives")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $advertiser;
 
     /**
      * Get id
@@ -92,6 +97,16 @@ class Creative
     public function getStatus()
     {
         return $this->status;
+    }
+
+    public function setAdvertiser(Advertiser $advertirser)
+    {
+        $this->advertiser = $advertirser;
+    }
+
+    public function getAdvertiser()
+    {
+        return $this->advertiser;
     }
 }
 

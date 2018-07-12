@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Publisher
@@ -27,6 +28,16 @@ class Publisher {
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Creative")
+     */
+    private $publisherCreative;
+
+    public function __contruct()
+    {
+        $this->publisherCreative = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -60,5 +71,17 @@ class Publisher {
     public function getName()
     {
         return $this->name;
+    }
+
+    public function addPublisherCreative(Creative $creative)
+    {
+        if ($this->publisherCreative->contains($creative)) {
+            return;
+        }
+        $this->publisherCreative[] = $creative; 
+    }
+
+    public function getPublisherCreative(){
+        return $this->publisherCreative;
     }
 }

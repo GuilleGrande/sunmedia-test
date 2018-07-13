@@ -42,6 +42,10 @@ class Image
      */
     private $size;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Component")
+     */
+    private $component;
 
     /**
      * Get id
@@ -123,6 +127,24 @@ class Image
     public function getSize()
     {
         return $this->size;
+    }
+
+    /**
+     * Set component
+     */
+    public function setComponent(Component $component)
+    {
+        $this->component = $component;
+
+        return $this;
+    }
+
+    /**
+     * Get component
+     */
+    public function getComponent()
+    {
+        return $this->component;
     }
 }
 

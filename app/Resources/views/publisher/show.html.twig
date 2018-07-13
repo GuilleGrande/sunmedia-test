@@ -1,24 +1,32 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Publisher: {{ publisher.name }}</h1>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Related creatives</th>
-            </tr>
-        </thead>
+    <h1>Publisher</h1>
+
+    <table>
         <tbody>
-            {% for relatedCreatives in publisher.relatedCreatives %}
-                <tr>
-                    <td>
-                        <a href="{{ path('creative_show', {
-                            'id': relatedCreatives.id
-                            })
-                        }}">{{ relatedCreatives.name }}</a>
-                    </td>
-                </tr>
-            {% endfor %}
+            <tr>
+                <th>Id</th>
+                <td>{{ publisher.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ publisher.name }}</td>
+            </tr>
         </tbody>
     </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('publisher_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('publisher_edit', { 'id': publisher.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
 {% endblock %}

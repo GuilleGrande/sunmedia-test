@@ -28,6 +28,10 @@ class Text
      */
     private $content;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Component")
+     */
+    private $component;
 
     /**
      * Get id
@@ -61,6 +65,24 @@ class Text
     public function getContent()
     {
         return $this->content;
+    }
+    
+    /**
+     * Set component
+     */
+    public function setComponent(Component $component)
+    {
+        $this->component = $component;
+
+        return $this;
+    }
+
+    /**
+     * Get component
+     */
+    public function getComponent()
+    {
+        return $this->component;
     }
 }
 

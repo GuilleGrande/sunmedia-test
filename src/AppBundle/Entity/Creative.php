@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Creative
@@ -50,6 +51,10 @@ class Creative
 
         $this->relatedPublishers = new ArrayCollection();
 
+    }
+
+    public function __toString(){
+        return $this->name;
     }
 
     /**

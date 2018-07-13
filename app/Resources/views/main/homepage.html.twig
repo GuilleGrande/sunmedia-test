@@ -1,5 +1,12 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Bienvenido a Sunmedia Test</h1>
+    <div class="jumbotron">
+        <h1>Bienvenido al Sunmedia Test</h1>
+        <p>Para empezar, seleccione alguna de las opciones a continuacion:</p>
+        <p>
+            <a class="btn btn-primary btn-lg" href="{{ path('publisher_new') }}" role="button">Crear <i>publihser</i></a>
+            <a class="btn btn-primary btn-lg" href="{{ path('advertiser_new') }}" role="button">Crear <i>advertiser</i></a>
+        </p>
+    </div>
 {% endblock %}

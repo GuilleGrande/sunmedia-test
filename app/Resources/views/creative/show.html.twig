@@ -3,10 +3,17 @@
 {% block body %}
     <h1>Creative</h1>
 
+    <dl class="creative-details-list">
+        <dt>Name</dt>
+        <dd>{{ creative.name }}</dd>
+        <dt>Status</dt>
+        <dd>{{ creative.status }}</dd>
+        <dt>Ad crated by</dt>
+        <dd>{{ creative.advertiser.name }}</dd>
+    </dl>
     <table class="table table-striped col-md-8">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Name</th>
                 <th>Status</th>
                 <th>Edit</th>
@@ -15,10 +22,10 @@
         </thead>
         <tbody>
             <tr>
-                <td>{{ creative.id }}</td>
                 <td>{{ creative.name }}</td>
-                <td>{% if creative.status %}Published{% else %}Unpublished{% endif %}</td>
-                <td><a href="{{ path('creative_edit', { 'id': creative.id }) }}" type="button" class="btn btn-primary" role="button">Edit</a></td>
+                <td>{{ creative.status }}</td>
+                <td>
+                    <a class="btn btn-primary" href="{{ path('creative_edit', { 'id': creative.id }) }}" role="button">Edit</a></td>
                 <td>
                     {{ form_start(delete_form) }}
                         <input type="submit" class="btn btn-danger" value="Delete">
@@ -28,9 +35,6 @@
         </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('creative_index') }}">Back to the list</a>
-        </li>
-    </ul>
+    <a href="{{ path('creative_index') }}">Back to the list</a>
+
 {% endblock %}

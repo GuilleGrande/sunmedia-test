@@ -63,6 +63,20 @@ class Component
      */
     private $coorZ;
 
+    /**
+     * @ORM\OneToOne(targetEntity="Image")
+     */
+    private $image;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Video")
+     */
+    private $video;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Text")
+     */
+    private $text;
 
     /**
      * Get id

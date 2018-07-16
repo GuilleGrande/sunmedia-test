@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Creative
@@ -30,11 +31,11 @@ class Creative
     private $name;
 
     /**
-     * @var bool
      *
-     * @ORM\Column(name="status", type="boolean")
+     * @ORM\Column(name="status", type="string")
+     * @Assert\Choice(choices={"published", "stopped", "publishing"}, message="Status must be 'published', 'stopped' or 'publishing'.")
      */
-    private $status = false;
+    private $status;
 
     /**
      * @ORM\ManyToOne(targetEntity="Advertiser", inversedBy="creatives")
@@ -47,14 +48,20 @@ class Creative
      */
     private $relatedPublishers;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="Component", inversedBy="relatedCreatives")
+     */
+    private $relatedComponents;
+
     public function __construct() {
 
         $this->relatedPublishers = new ArrayCollection();
+        $this->relatedComponents = new ArrayCollection();
 
     }
 
     public function __toString(){
-        return $this->name;
+        return $this->getName();
     }
 
     /**
@@ -132,6 +139,21 @@ class Creative
     {
         return $this->relatedPublishers;
 
+    }
+
+    public function setRelatedComponents(Component $component)
+    {
+        if ($this->relatedComponents->contains($component)) {
+            return;
+        }
+        $this->relatedComponents[] = $component;
+    }
+
+    /**
+     * @return ArrayCollection|Component[]
+     */
+    public function getRelatedComponents(){
+        return $this->relatedComponents;
     }
 }
 

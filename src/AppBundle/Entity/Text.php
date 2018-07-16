@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Text
@@ -25,11 +26,17 @@ class Text
      * @var string
      *
      * @ORM\Column(name="content", type="string", length=140)
+     * @Assert\Length(
+     *      min = 1,
+     *      max = 140,
+     *      minMessage = "Content must be at least {{ limit }} characters long",
+     *      maxMessage = "Content cannot be longer than {{ limit }} characters"
+     * )
      */
     private $content;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Component")
+     * @ORM\OneToMany(targetEntity="Component", mappedBy="text")
      */
     private $component;
 

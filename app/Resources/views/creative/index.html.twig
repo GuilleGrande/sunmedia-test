@@ -1,12 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Creatives list</h1>
-
-    <table>
+    <h1>Ads list</h1>
+    <table class="table table-striped col-md-8">
         <thead>
             <tr>
-                <th>Id</th>
+                <th>Created by</th>
                 <th>Name</th>
                 <th>Status</th>
                 <th>Actions</th>
@@ -15,9 +14,11 @@
         <tbody>
         {% for creative in creatives %}
             <tr>
-                <td><a href="{{ path('creative_show', { 'id': creative.id }) }}">{{ creative.id }}</a></td>
+                <!--<td><a href="{{ path('creative_show', { 'id': creative.id }) }}">{{ creative.id }}</a></td>-->
+                <td><a href="{{ path('advertiser_show', { 'slug': creative.advertiser.slug }) }}">{{ creative.advertiser.name }}</td>
+
                 <td>{{ creative.name }}</td>
-                <td>{% if creative.status %}Yes{% else %}No{% endif %}</td>
+                <td>{{ creative.status }}</td>
                 <td>
                     <ul>
                         <li>

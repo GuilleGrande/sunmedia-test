@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Video
@@ -25,6 +26,7 @@ class Video
      * @var string
      *
      * @ORM\Column(name="url", type="string", length=255)
+     * @Assert\Url(message = "The url '{{ value }}' is not a valid url")
      */
     private $url;
 
@@ -32,6 +34,7 @@ class Video
      * @var string
      *
      * @ORM\Column(name="format", type="string", length=255)
+     * @Assert\Choice(choices={"mp4", "webm"}, message="Format must be 'mp4' or 'webm'.")
      */
     private $format;
 
@@ -43,7 +46,7 @@ class Video
     private $size;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Component")
+     * @ORM\OneToMany(targetEntity="Component", mappedBy="video")
      */
     private $component;
 

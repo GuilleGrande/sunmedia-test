@@ -73,7 +73,7 @@ class Publisher {
         return $this->name;
     }
 
-    public function addRelatedCreatives(Creative $creative)
+    public function setRelatedCreatives(Creative $creative)
     {
         if ($this->relatedCreatives->contains($creative)) {
             return;

@@ -9,5 +9,5 @@ AppBundle\Entity\Advertiser:
 AppBundle\Entity\Creative:
   advertiser.creative_{1..50}:
     name: <sentence($nbWords = 6, $variableNbWords = true)>
-    status: false
+    status: <randomElement($array = array ('published','stopped','publishing'))>
     advertiser: '@advertiser_*'

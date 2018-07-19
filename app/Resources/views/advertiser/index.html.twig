@@ -1,39 +1,25 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Advertisers list</h1>
-
+    <h1>Advertisers list<a class="btn btn-outline-success btn-lg float-right" href="{{ path('advertiser_new') }}">New advertiser</a></h1>
     <table class="table table-striped col-md-8">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Name</th>
-                <th>Actions</th>
+                <th># Created ads</th>
+                <th>Show</th>
+                <th>Edit</th>
             </tr>
         </thead>
         <tbody>
         {% for advertiser in advertisers %}
             <tr>
-                <td><a href="{{ path('advertiser_show', { 'slug': advertiser.slug }) }}">{{ advertiser.id }}</a></td>
                 <td>{{ advertiser.name }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('advertiser_show', { 'slug': advertiser.slug }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('advertiser_edit', { 'id': advertiser.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
+                <td>{{ advertiser.creatives|length }}</td>
+                <td><a class="btn btn-outline-primary" href="{{ path('advertiser_show', { 'slug': advertiser.slug }) }}" role="button">Show</a></td>
+                <td><a class="btn btn-outline-primary" href="{{ path('advertiser_edit', { 'id': advertiser.id }) }}" role="button">Edit</a></td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('advertiser_new') }}">Create a new advertiser</a>
-        </li>
-    </ul>
 {% endblock %}

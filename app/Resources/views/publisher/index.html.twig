@@ -1,39 +1,25 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Publishers list</h1>
-
+    <h1>Publishers list <a style="margin-top:4px;" class="btn btn-outline-success btn-lg float-right" href="{{ path('publisher_new') }}">New publisher</a></h1>
     <table class="table table-striped col-md-8">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Name</th>
-                <th>Actions</th>
+                <th># Related ads</th>
+                <th>Show</th>
+                <th>Edit</th>
             </tr>
         </thead>
         <tbody>
         {% for publisher in publishers %}
             <tr>
-                <td><a href="{{ path('publisher_show', { 'id': publisher.id }) }}">{{ publisher.id }}</a></td>
                 <td>{{ publisher.name }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('publisher_show', { 'id': publisher.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('publisher_edit', { 'id': publisher.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
+                <td>{{ publisher.relatedCreatives|length }}</td>
+                <td><a class="btn btn-outline-primary" href="{{ path('publisher_show', { 'id': publisher.id }) }}" role="button">Show</a></td>
+                <td><a class="btn btn-outline-primary" href="{{ path('publisher_edit', { 'id': publisher.id }) }}" role="button">Edit</a></td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('publisher_new') }}">Create a new publisher</a>
-        </li>
-    </ul>
 {% endblock %}

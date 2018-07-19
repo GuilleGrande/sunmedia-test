@@ -32,7 +32,7 @@ class Advertiser {
 
 
     /**
-     * @ORM\OneToMany(targetEntity="Creative", mappedBy="advertiser")
+     * @ORM\OneToMany(targetEntity="Creative", mappedBy="advertiser", fetch="EXTRA_LAZY")
      */
     private $creatives;
 
@@ -45,6 +45,10 @@ class Advertiser {
     public function __construct()
     {
         $this->creatives = new ArrayCollection();
+    }
+
+    public function __toString(){
+        return $this->getName();
     }
 
     /**

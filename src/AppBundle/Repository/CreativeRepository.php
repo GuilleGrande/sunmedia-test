@@ -18,4 +18,11 @@ class CreativeRepository extends EntityRepository
         return $this->createQueryBuilder('creatives')
             ->orderBy('creatives.name', 'ASC');
     }
+    /*
+    public function getAllCreatedCreativesById(Advertiser $advertiser) {
+        return $this->createQueryBuilder('creatives')
+                    ->andWhere('creatives.advertiser = :advertiser')
+                    ->setParameter('advertiser', $advertiser)
+    }
+    */
 }

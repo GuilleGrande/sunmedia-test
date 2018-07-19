@@ -49,7 +49,7 @@ class Creative
     private $relatedPublishers;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Component", inversedBy="relatedCreatives")
+     * @ORM\ManyToMany(targetEntity="Component")
      */
     private $relatedComponents;
 
